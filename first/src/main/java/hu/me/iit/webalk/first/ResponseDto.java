@@ -4,6 +4,7 @@ public class ResponseDto {
 	int id;
 	String message;
 	
+	
 	public int getId() {
 		return id;
 	}
@@ -16,4 +17,7 @@ public class ResponseDto {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+	
+	
+	
 }
