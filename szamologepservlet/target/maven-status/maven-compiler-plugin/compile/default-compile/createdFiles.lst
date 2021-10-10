@@ -1,0 +1,4 @@
+szamologepszervlet\model\Szamologep.class
+szamologepszervlet\ResultDto.class
+szamologepszervlet\model\NotSupportedOperationException.class
+szamologepszervlet\SzamologepServlet.class
