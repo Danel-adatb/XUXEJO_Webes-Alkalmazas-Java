@@ -1,70 +1,39 @@
 package hu.me.iit.webalk.first;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 @RestController
+@RequestMapping(path="article")
 public class MainController {
 
-	private final List<ArticlesDto> articles = new ArrayList();
+	private final ArticleService articleService;
 
-	@GetMapping(path = "articles/", produces = MediaType.APPLICATION_JSON_VALUE)
-
-	List<ArticlesDto> allArticles() {
-		return articles;
+	public MainController(ArticleService articleService) {
+		this.articleService = articleService;
 	}
 
-	@PostMapping(path = "articles/")
-	void newArticle(@RequestBody @Valid ArticlesDto articlesDto) {
-		articles.add(articlesDto);
+	@GetMapping(path="", produces= MediaType.APPLICATION_JSON_VALUE)
+	public List<ArticleDto> allArticles() {
+		return articleService.findAll();
 	}
 
-	private int findArticleById(String id) {
-		int found = -1;
-
-		for (int i = 0; i < articles.size(); i++) {
-			if (articles.get(i).getTitle().equals(id)) {
-				found = i;
-				break;
-			}
-		}
-		return found;
+	@PostMapping(path="")
+	public void newArticle(@RequestBody @Valid ArticleDto articleDto) {
+		articleService.save(articleDto);
 	}
 
-	@PutMapping(path = "articles/{id}")
-	void replaceArticle(@PathVariable("id") String id, @RequestBody @Valid ArticlesDto articlesDto) {
-
-		int found = findArticleById(id);
-
-		if (found != -1) {
-			ArticlesDto foundArticle = articles.get(found);
-			foundArticle.setAuthor(articlesDto.getAuthor());
-			foundArticle.setPages(articlesDto.getPages());
-		}
+	@PutMapping(path="/")
+	public void replaceArticle(@RequestBody @Valid ArticleDto articleDto) {
+		articleService.save(articleDto);
 	}
 
-	@DeleteMapping(path = "articles/{id}")
-	public void deleteArticle(@PathVariable("id") String id) {
-		int found = findArticleById(id);
-
-		if (found != -1) {
-			articles.remove(found);
-		}
-
+	@DeleteMapping (path="/{id}")
+	public void deleteArticle(@PathVariable("id") Long id) {
+		articleService.deleteById(id);
 	}
 
 }
