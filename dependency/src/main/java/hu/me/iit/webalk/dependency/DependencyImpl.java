@@ -13,4 +13,11 @@ public class DependencyImpl implements Dependency {
     public void helpWithParameterNoReturnValue(int a) {
 
     }
+    @Override
+	public String getImportant(String text) {
+		text = text.substring(0, Math.min(text.length(), 3));
+		text.format(text, "...");
+		
+		return text;
+	}
 }
