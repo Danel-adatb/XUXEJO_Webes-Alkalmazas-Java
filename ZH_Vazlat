@@ -1,0 +1,23 @@
+Webes Applikáció működése
+
+GET HTTP
+Az Összes _____ lekérdezése egy Http GET kéréssel történik, vissza adja az összes ______-t. (getAllFutas() metódus)
+
+- http://localhost:8080/______ ... visszaadja az összes adatot a localhoston
+
+POST Http
+Ennek segítségével adhatunk hozzá új adatot az adatbázishoz. Az URL-je nem tér el, mégis működése sokban
+
+PUT Http
+Post társához hasonlóan @RequestBody-t vár. Ez felel meg az UPDATE-nek
+
+DELETE Http
+Delete azaz adatok törlésért felelős. ID alapján töröl adatot az adatbázisból
+
+GET Http (2.0)
+Ez a GET kérés kérdezi le a külön feladatot, amit a CRUD műveleteken kívűl még pluszba létrehoztunk. Magyarazat...
+
+Swagger-ben lekérdezések ellenőrzése: http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/
+H2 Console az ellenőrzések megerősítéséhez: http://localhost:8080/h2-console/login.do?jsessionid=a3710ea6e585ff293382066f7272c0dc
+username: sa
+password: password
